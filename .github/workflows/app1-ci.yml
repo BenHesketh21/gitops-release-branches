@@ -22,13 +22,7 @@ jobs:
       run: docker login --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password "${{ secrets.DOCKER_HUB_PASSWORD }}"
     - name: Docker Push
       run: docker push benhesketh21/app1:${GITHUB_REF_NAME}-${GITHUB_RUN_ID}
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+    - run: |
+        gh release create ${GITHUB_REF_NAME}-${GITHUB_RUN_ID} -p
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${GITHUB_REF_NAME}-${GITHUB_RUN_ID}
-        release_name: ${GITHUB_REF_NAME}-${GITHUB_RUN_ID}
-        draft: false
-        prerelease: true
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

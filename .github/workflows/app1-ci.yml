@@ -3,6 +3,8 @@ name: Build App 1
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - app1
 
 jobs:
 

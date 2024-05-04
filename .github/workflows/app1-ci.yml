@@ -23,6 +23,6 @@ jobs:
     - name: Docker Push
       run: docker push benhesketh21/app1:${GITHUB_REF_NAME}-${GITHUB_RUN_ID}
     - run: |
-        gh release create "app1 ${GITHUB_REF_NAME}-${GITHUB_RUN_ID}" -p
+        gh release create "app1-${GITHUB_REF_NAME}-${GITHUB_RUN_ID}" -p
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

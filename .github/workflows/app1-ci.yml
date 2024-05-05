@@ -1,6 +1,7 @@
 name: Build App 1
 
 on:
+  create:
   push:
     branches:
       - main

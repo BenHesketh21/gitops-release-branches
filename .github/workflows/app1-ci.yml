@@ -26,3 +26,7 @@ jobs:
         gh release create "app1-${GITHUB_REF_NAME}-${GITHUB_RUN_ID}"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: |
+        gh workflow run test-main -R BenHesketh21/gitops-release-branches-argo
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

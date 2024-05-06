@@ -10,5 +10,9 @@ def index():
 def new():
     return "App1 Hello!!!!!!!!!!!!!"
 
+@app.route('/new1')
+def new1():
+    return "App1 Hello!!!!!!!!!!!!!"
+
 if __name__ == "__main__":
     app.run('0.0.0.0', port=5000)

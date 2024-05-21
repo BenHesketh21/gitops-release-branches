@@ -8,7 +8,7 @@ def index():
 
 @app.route('/new')
 def new():
-    return "App1 Hello!!!!!!!!!!!!!"
+    return "App1 Hello!!!!!!!!!!!!!!!!!"
 
 @app.route('/new1')
 def new1():

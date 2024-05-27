@@ -20,8 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build ./app1 --file ./app1/Dockerfile --tag ghcr.io/BenHesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
+      run: docker build ./app1 --file ./app1/Dockerfile --tag ghcr.io/benhesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
     - name: Docker Login
       run: docker login --username "BenHesketh21" --password "${{ secrets.GITHUB_TOKEN }}"
     - name: Docker Push
-      run: docker push ghcr.io/BenHesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
+      run: docker push ghcr.io/benhesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}

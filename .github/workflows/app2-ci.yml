@@ -23,6 +23,6 @@ jobs:
     - name: Build the Docker image
       run: docker build ./app2 --file ./app2/Dockerfile --tag ghcr.io/benhesketh21/app2:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
     - name: Docker Login
-      run: docker login --username "BenHesketh21" --password "${{ secrets.GITHUB_TOKEN }}"
+      run: docker login ghcr.io --username "BenHesketh21" --password "${{ secrets.GITHUB_TOKEN }}"
     - name: Docker Push
       run: docker push ghcr.io/benhesketh21/app2:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}

@@ -19,9 +19,32 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build ./app1 --file ./app1/Dockerfile --tag ghcr.io/benhesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
-    - name: Docker Login
-      run: docker login ghcr.io --username "BenHesketh21" --password "${{ secrets.GITHUB_TOKEN }}"
-    - name: Docker Push
-      run: docker push ghcr.io/benhesketh21/app1:${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: BenHesketh21
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        # list of Docker images to use as base name for tags
+        images: |
+          ghcr.io/benhesketh21/app1
+        # generate Docker tags based on the following events/attributes
+        tags: |
+          type=raw,values=${GITHUB_REF_NAME/release\//}-${GITHUB_RUN_ID}
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: user/app:latest
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
